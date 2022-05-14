@@ -28,6 +28,7 @@ public:
         state = false;
         moving = false;
         isSource = false;
+        //TypeId = O_AND;
 
     }
     virtual ~Object() {

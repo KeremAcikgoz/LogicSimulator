@@ -10,33 +10,29 @@ protected:
     int numPins; //Number of pins of the logic element
     sf::Vertex position;
 public:
-    LogicElement(sf::Vertex pos) {
-        if (!textures[1].loadFromFile(Texture(this->TypeId)))
-        {
-            cout << "Failed to load texture !" << endl;
-        }
+    LogicElement(sf::Vertex pos) 
+    {
         sprite.setPosition(sf::Vector2f(pos.position.x, pos.position.y));
-        sprite.setTexture(textures[1]);
     }
     virtual void Drag(sf::Vertex new_position){
         sprite.setPosition(new_position.position);
     }
 
-    virtual string Texture(ObjectTypes type){
-        string texture;
-        switch (type)
-        {
-        case O_AND:
-            texture = "../assets/AND.png";
-            break;
-        
-        default:
-            texture = "";
-            break;
-        }
-        texture = "";
-        return texture;
-}
+    //virtual string Texture(ObjectTypes type){
+    //    string texture;
+    //    switch (type)
+    //    {
+    //    case O_AND:
+    //        texture = "../assets/AND.png";
+    //        break;
+    //    
+    //    default:
+    //        texture = "";
+    //        break;
+    //    }
+    //    texture = "";
+    //    return texture;
+    //}
 };
 
 

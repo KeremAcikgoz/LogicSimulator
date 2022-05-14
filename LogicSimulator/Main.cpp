@@ -17,9 +17,12 @@ int main()
 
     Object *objects = &wire;
 
-    Object *and_source = create_element(O_AND, get_vertex(300.f, 600.f));
+    Object* and_source = create_element(O_AND, get_vertex(300.f, 600.f));
     and_source->isSource = true;
-    append_to_objects(objects, and_source);
+    objects = append_to_objects(objects, and_source);
+
+    Object* and_source2 = create_element(O_AND, get_vertex(300.f, 220.f));
+    objects = append_to_objects(objects, and_source2);
 
     // AndGate andd(300.f, 300.f);
 
