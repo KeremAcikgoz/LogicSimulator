@@ -15,13 +15,13 @@ using namespace std;
 
 int main()
 { 
-    Wire wire(10.f, 50.f);
+    //Wire wire();
     AndGate andd(300.f, 300.f);
-    Object* objects = &wire;
-    Wire wire2(100.f, 50.f);
-    wire2.next = &andd;
-    andd.next = objects;
-    objects = &andd;
+    //Object* objects = &wire;
+    //Wire wire2();
+    //wire2.next = &andd;
+    //andd.next = objects;
+    Object* objects = &andd;
 
     Simulator simulator(objects);
     
