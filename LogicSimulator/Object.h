@@ -17,6 +17,7 @@ public:
     sf::RenderWindow window;
     Object* next;
     sf::Sprite sprite;
+    ObjTypes TypeId;
     Object() {
         //window = window;
         //textures = textures
