@@ -5,15 +5,9 @@
 #include <SFML/Graphics.hpp>
 //#include "Simulator.h"
 #include "AndGate.h"
-#include "utils.h"
+#include "utils.cpp"
 
 using namespace std;
-
-//class Simulator {
-//    Object* head;
-//
-//};
-
 
 
 int main()
@@ -24,9 +18,9 @@ int main()
 
     Object* objects = &wire;
     
-    //Object* and_source = create_element(O_AND, get_vertex(300.f, 600.f));
-    //and_source->isSource = true;
-    //append_to_objects(objects, and_source);
+    Object* and_source = create_element(O_AND, get_vertex(300.f, 600.f));
+    and_source->isSource = true;
+    append_to_objects(objects, and_source);
 
    
     // AndGate andd(300.f, 300.f);

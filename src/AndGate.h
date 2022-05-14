@@ -1,6 +1,9 @@
 #pragma once
+#ifndef ANDGATE_H
+#define ANDGATE_H
+
 #include "LogicElement.h"
-#include "utils.h"
+
 class AndGate :
     public LogicElement
 {
@@ -12,3 +15,5 @@ public:
     };
 
 };
+
+#endif

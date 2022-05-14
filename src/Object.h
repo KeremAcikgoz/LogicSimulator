@@ -5,7 +5,6 @@ using namespace std;
 
 enum ObjectTypes { O_NULL, O_AND, O_OR, O_XOR, O_NOT, O_Panel, O_Led, O_Vdd, O_Ground, O_Dff};
 
-
 class Object 
 {
 protected:
@@ -31,19 +30,19 @@ public:
         isSource = false;
 
     }
-    ~Object() {
+    virtual ~Object() {
         cout << "Object Destructor called" << endl;
     }
-    bool getState() {
+    virtual bool getState() {
         return state;
     }
-    bool IsLocked() {
+    virtual bool IsLocked() {
         return locked;
     }
-    bool IsSelected() {
+    virtual bool IsSelected() {
         return selected;
     }
-    sf::Sprite getSprite() {
+    virtual sf::Sprite getSprite() {
         return sprite;
     }
 

@@ -2,32 +2,17 @@
 #include "Object.h"
 #include "AndGate.h"
 
-string Texture(ObjectTypes type){
-    string texture;
-    switch (type)
-    {
-    case O_AND:
-        texture = "../assets/AND.png";
-        break;
-    
-    default:
-        texture = "";
-        break;
-    }
-    texture = "";
-    return texture;
-}
 
 Object* create_element(ObjectTypes type, sf::Vertex position){
     
     switch (type)
     {
-    case O_AND:
-        // AndGate new_and_gate(position);
-        // return &new_and_gate;
-        break;
-    default:
-        break;
+        case O_AND:
+            return new AndGate(position);
+            break;
+        default:
+            return new AndGate(position);
+            break;
     }
 
 }
