@@ -1,10 +1,12 @@
 #pragma once
 #include "Object.h"
 #include <iostream>
+#include "Pin.h"
 #include <SFML/Graphics.hpp>
 //using namespace std;
 class Wire : public Object
 {
+    Pin* pins[2];
     sf::Vertex line[2];
 public:
     Wire() {

@@ -2,7 +2,7 @@
 #include "Wire.h"
 #include "Object.h"
 #include <SFML/Graphics.hpp>
-#include "Simulator.h"
+//#include "Simulator.h"
 #include "AndGate.h"
 using namespace std;
 
@@ -23,7 +23,7 @@ int main()
     //andd.next = objects;
     Object* objects = &andd;
 
-    Simulator simulator(objects);
+   // Simulator simulator(objects);
     
     //sf::Texture texture;
     /*
