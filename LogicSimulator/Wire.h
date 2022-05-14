@@ -3,23 +3,24 @@
 #include <iostream>
 #include "Pin.h"
 #include <SFML/Graphics.hpp>
-//using namespace std;
+using namespace std;
 class Wire : public Object
 {
     Pin* pins[2];
     sf::Vertex line[2];
+    
 public:
-    Wire() {
-       /* if (!textures[1].loadFromFile("../assets/AND.png"))
-        {
-           std::cout << "Failed to load texture !" << endl;
-        }
-        sprite.setPosition(sf::Vector2f(x,y));
-        sprite.setTexture(textures[1]);*/
-
-        //window->draw(sprite);
+    Wire(sf::Vertex start_point, Pin start_pin) {
+        line[0] = start_point;
+        line[1] = start_point;
+        pins[0] = &start_pin;
+        pins[1] = NULL;
     }
-    /*sf::Sprite getSprite() {
-        return sprite;
-    }*/
+    void Extend(sf::Vertex end_point){
+        line[1] = end_point;
+    }
+    void ConnectWire(Pin end_pin){
+        pins[1] = &end_pin;
+    }
+
 };

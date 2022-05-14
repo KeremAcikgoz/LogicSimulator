@@ -15,46 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Wire.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Simulator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogicElement.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AndGate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Object.h">
+    <ClInclude Include="Pin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wire.h">
+    <ClInclude Include="utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Simulator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogicElement.h">
+    <ClInclude Include="Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AndGate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LogicElement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

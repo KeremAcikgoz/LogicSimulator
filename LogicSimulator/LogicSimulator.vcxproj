@@ -18,6 +18,17 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AndGate.h" />
+    <ClInclude Include="LogicElement.h" />
+    <ClInclude Include="Object.h" />
+    <ClInclude Include="Pin.h" />
+    <ClInclude Include="Simulator.h" />
+    <ClInclude Include="utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -144,23 +155,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="AndGate.cpp" />
-    <ClCompile Include="LogicElement.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Pin.cpp" />
-    <ClCompile Include="Simulator.cpp" />
-    <ClCompile Include="Wire.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AndGate.h" />
-    <ClInclude Include="LogicElement.h" />
-    <ClInclude Include="Object.h" />
-    <ClInclude Include="Pin.h" />
-    <ClInclude Include="Simulator.h" />
-    <ClInclude Include="Wire.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

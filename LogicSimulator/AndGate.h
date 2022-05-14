@@ -1,18 +1,19 @@
 #pragma once
+#ifndef ANDGATE_H
+#define ANDGATE_H
+
 #include "LogicElement.h"
+
 class AndGate :
     public LogicElement
 {
 public:
-    AndGate(float x, float y) {
-        if (!textures[1].loadFromFile("../assets/AND.png"))
-        {
-            cout << "Failed to load texture !" << endl;
-        }
-        sprite.setPosition(sf::Vector2f(x, y));
-        sprite.setTexture(textures[1]);
-
+    AndGate(sf::Vertex pos) : LogicElement(pos) {
+        
         numPins = 3;
+        TypeId = O_AND;
     };
 
 };
+
+#endif
