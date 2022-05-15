@@ -6,21 +6,18 @@
 using namespace std;
 class Wire : public Object
 {
-    Pin* pins[2];
+    Pin* pins[2];           
     sf::Vertex line[2];
-    
-public:
-    Wire(sf::Vertex start_point, Pin start_pin) {
-        line[0] = start_point;
-        line[1] = start_point;
-        pins[0] = &start_pin;
-        pins[1] = NULL;
-    }
-    void Extend(sf::Vertex end_point){
-        line[1] = end_point;
-    }
-    void ConnectWire(Pin end_pin){
-        pins[1] = &end_pin;
-    }
 
+public:
+    Wire(sf::Vertex start_point, Pin* start_pin, Pin* tmp_end_pin);
+    ~Wire() {
+        pins[0]->RemoveConnection(this);
+        pins[1]->RemoveConnection(this);
+        UpdatePosition(sf::Vertex(sf::Vector2f(0.f, 0.f)));
+    }
+    void Extend(sf::Vertex end_point);
+    void ConnectWire(Pin* end_pin);
+    void UpdatePosition(sf::Vertex new_position);
+    sf::VertexArray GetPosition();
 };

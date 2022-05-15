@@ -1,38 +1,22 @@
 #pragma once
 #include "Object.h"
 #include "Pin.h"
-
-class LogicElement :
-    public Object
+#include <SFML/Graphics.hpp>
+using namespace std;
+class LogicElement : public Object
 {
 protected:
     Pin pins[4]; //List of pins of the logic element
-    int numPins; //Number of pins of the logic element
+    int numPins = 0; //Number of pins of the logic element
     sf::Vertex position;
+    sf::Vertex relativePinLocations[4];
+    sf::Vector2f RoughSize = sf::Vector2f(10, 10);
 public:
-    LogicElement(sf::Vertex pos) 
-    {
-        sprite.setPosition(sf::Vector2f(pos.position.x, pos.position.y));
-    }
-    virtual void Drag(sf::Vertex new_position){
-        sprite.setPosition(new_position.position);
-    }
+    LogicElement(sf::Vertex pos);
+    void UpdatePosition(sf::Vertex new_position);
+    Pin* DoesTouchPins(sf::Vector2f mPos, bool* isTrue);
+    sf::VertexArray GetPosition();
 
-    //virtual string Texture(ObjectTypes type){
-    //    string texture;
-    //    switch (type)
-    //    {
-    //    case O_AND:
-    //        texture = "../assets/AND.png";
-    //        break;
-    //    
-    //    default:
-    //        texture = "";
-    //        break;
-    //    }
-    //    texture = "";
-    //    return texture;
-    //}
 };
 
 

@@ -3,9 +3,9 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-enum ObjectTypes { O_NULL, O_AND, O_OR, O_XOR, O_NOT, O_Panel, O_Led, O_Vdd, O_Ground, O_Dff};
+enum ObjectTypes { O_NULL, O_AND, O_OR, O_XOR, O_NOT, O_LED, O_Vdd, O_GND, O_Dff, O_WIRE };
 
-class Object 
+class Object
 {
 protected:
     bool locked;
@@ -46,6 +46,13 @@ public:
     virtual sf::Sprite getSprite() {
         return sprite;
     }
+    virtual void SetSelected(bool isSelected) {
+        selected = isSelected;
+    }
+    virtual void UpdatePosition(sf::Vertex new_position) = 0;
+    virtual bool DoesContain(sf::Vector2f mPos) {
+        return sprite.getGlobalBounds().contains(mPos);
+    }
+    virtual sf::VertexArray GetPosition() = 0;
 
-    
 };

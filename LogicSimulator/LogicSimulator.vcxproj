@@ -20,14 +20,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AndGate.h" />
+    <ClInclude Include="Display.h" />
     <ClInclude Include="LogicElement.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="Simulator.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="Wire.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AndGate.cpp" />
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="LogicElement.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Pin.cpp" />
+    <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
