@@ -13,9 +13,12 @@ protected:
     sf::Vector2f RoughSize = sf::Vector2f(10, 10);
 public:
     LogicElement(sf::Vertex pos);
+    virtual ~LogicElement();
     void UpdatePosition(sf::Vertex new_position);
     Pin* DoesTouchPins(sf::Vector2f mPos, bool* isTrue);
     sf::VertexArray GetPosition();
+    bool DoesContainPin(Pin* pin);
+    Pin* GetPin(int i);
 
 };
 

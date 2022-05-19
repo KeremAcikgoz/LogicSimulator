@@ -7,6 +7,7 @@
 #include "AndGate.h"
 #include "utils.h"
 #include "Display.h"
+#include "Pin.h"
 #include "LogicElement.h"
 
 #define keyPressed(key) sf::Keyboard::isKeyPressed(key)
@@ -17,23 +18,36 @@ using namespace std;
 
 int main()
 {
+	//sf::Vertex vert(sf::Vector2f(300.f, 300.f));
+	//sf::Vertex vert2(sf::Vector2f(600.f, 600.f));
+	//Pin pin(OUTPUT, 0, vert);
+	//Pin pin2(INPUT, 0, vert2);
+
+	//Wire* wire = new Wire(vert, &pin, &pin2);
+	//AndGate* andnew = new AndGate(vert);
+
+	//wire->ConnectWire(&pin2);
+
+	//delete wire;
+	//Wire* wire2 = wire;
+	//delete andnew;
+	//AndGate* and_source2 = new AndGate(get_vertex(1.f, 100.f));
+	//delete and_source2;
+	//cout << "wait" << endl;
+	//while (true);
+
+
 	bool wasLeftClick = false;
 	bool wasRightClick = false;
 	Object* selectedObj = NULL;
 	bool isSelected = false;
 	bool clickSpent = false;
 	sf::Vector2f offset;
-	sf::Vertex vert(sf::Vector2f(300.f, 300.f));
-	sf::Vertex vert2(sf::Vector2f(600.f, 600.f));
-	Pin pin(OUTPUT, 0, vert);
-	Pin pin2(INPUT, 0, vert2);
 
-	Wire wire(vert, &pin, &pin2);
-	//wire.ConnectWire(pin2);
 	Pin tmp_pin(OUTPUT, 0, sf::Vertex(sf::Vector2f(0.f, 0.f)));
-	
 
-	Object* objects = &wire;
+
+	Object* objects = NULL;
 
 	Object* and_source = create_element(O_AND, get_vertex(1.f, 1.f));
 	and_source->isSource = true;
@@ -54,6 +68,7 @@ int main()
 
 	while (window.isOpen()) {
 
+		bool isMouse = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
 		auto mPos = sf::Vector2f(sf::Mouse::getPosition(window));
 		tmp_pin.DragPin(mPos);
 		//cout << mPos.x << " " << mPos.y << endl;
@@ -69,40 +84,50 @@ int main()
 
 			bool isLeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 			bool isRightClick = sf::Mouse::isButtonPressed(sf::Mouse::Right);
+			//switch case yapýlabilir. her týklamada sayý artar
 
 			if (isLeftClick) {
 				if (wasLeftClick) {
 					if (clickSpent) continue;
 					//drag selected if draggable, check for pins if making wire and when pin found clickspent=true
-					else if (selectedObj && selectedObj->TypeId == O_WIRE) {
+					if (selectedObj && selectedObj->TypeId == O_WIRE) {
 						//is there a pin around? if yes connect and set clickspent = true
 						//else keep dragging tmp_pin along with mouse
 						Wire* current_wire = dynamic_cast<Wire*>(selectedObj);
+						LogicElement* current_logic_element = NULL;
 						Object* obj = objects;
 						while (obj) {
+
 							if (obj->TypeId != O_WIRE && obj->DoesContain(mPos) && !obj->isSource) {
-								selectedObj = obj;
-								isSelected = true;
+								LogicElement* selectedLogicElement = dynamic_cast<LogicElement*>(obj);
+								if (selectedLogicElement->DoesContainPin(current_wire->GetFirstPin())) {
+									break;
+								}
+								current_logic_element = selectedLogicElement;
 								offset = mPos - obj->getSprite().getPosition();
 								break;
 							}
 							obj = obj->next;
 						}
-						if (isSelected) {
+						if (current_logic_element && current_logic_element->TypeId != O_WIRE) {
 							bool isTouching = false;
+							//ayrý ayrý fonksiyon olarak yazýlabilir
 
-							LogicElement* selectedElement = dynamic_cast<LogicElement*>(selectedObj);
+							//LogicElement* selectedElement = dynamic_cast<LogicElement*>(selectedObj);
 
-							Pin* selectedPin = selectedElement->DoesTouchPins(mPos, &isTouching);
+							Pin* selectedPin = current_logic_element->DoesTouchPins(mPos, &isTouching);
 
 							if (isTouching) {
-								current_wire->ConnectWire(selectedPin);
-								isSelected = false;
-								clickSpent = true;
+								if (current_wire->GetFirstPin()->type != selectedPin->type) {
+									//TODO: check if type == input and there is a wire
+									current_wire->ConnectWire(selectedPin);
+									isSelected = false;
+									clickSpent = true;
+								}
 							}
 
 						}
-						
+
 					}
 					else {
 						//drag
@@ -124,7 +149,6 @@ int main()
 					if (isSelected) {
 						if (selectedObj->isSource) {
 							//create new object from that type and select that
-
 							selectedObj = create_element(selectedObj->TypeId, mPos);
 							objects = append_to_objects(objects, selectedObj);
 
@@ -133,12 +157,10 @@ int main()
 							//check if it is close to a pin,
 							//if so, create wire and select it
 							bool isTouching = false;
-							//struct isTouching { bool isTrue = false; };
-						
 							LogicElement* selectedElement = dynamic_cast<LogicElement*>(selectedObj);
-							
+
 							Pin* selectedPin = selectedElement->DoesTouchPins(mPos, &isTouching);
-		
+
 							if (isTouching) {
 								Wire* wire = new Wire(selectedPin->pos, selectedPin, &tmp_pin);
 								wire->SetSelected(true);
@@ -155,14 +177,24 @@ int main()
 
 			if (isRightClick) {
 				if (!wasRightClick) {
-
+					
 					//remove if logic element or wire just once when it is clicked
 					Object* obj = objects;
 					while (obj) {
-						if (!obj->isSource && obj->DoesContain(mPos)) {
-							//TODO: remove obj from objects
-							//TODO: remember to clear pins and wires too
-
+						if (!obj->isSource && obj->TypeId != O_WIRE && obj->DoesContain(mPos)) {
+							//remove obj from objects
+							//remember to clear pins and wires too
+							LogicElement* selectedElement = dynamic_cast<LogicElement*>(obj);//?
+							for (int i = 0; i < 4; i++) {
+								Object** list_of_wires = selectedElement->GetPin(i)->wires;
+								for (int j = 0; j < MAX_CONNECTIONS; j++) {
+									objects = removeElement(objects, list_of_wires[j]);
+									delete[] list_of_wires[j];
+								}
+								
+							}
+							objects = removeElement(objects, selectedElement);
+							delete selectedElement;
 							break;
 						}
 						obj = obj->next;
@@ -174,19 +206,19 @@ int main()
 				if (wasLeftClick) {
 					if (isSelected) {
 						//release actions: if wire remove, if logic element release
-						if (selectedObj->TypeId == O_WIRE) {
-							//TODO: remove wire since it is of no use anymore
-							//TODO: remember to clear pins too
-							if (!clickSpent) {
-								//Wire* selectedWire = dynamic_cast<Wire*>(selectedObj);//?
-								//TODO: add delete func to utils.
-								//selectedWire->~Wire();
-							}
-							isSelected = false;
+						if (selectedObj->TypeId == O_WIRE && !clickSpent) {
+							//remove wire since it is of no use anymore
+							//remember to clear pins too
+							//remove wire from objects
+							
+							Wire* selectedWire = dynamic_cast<Wire*>(selectedObj);//?
+							objects = removeElement(objects, selectedWire);
+							delete selectedWire;
+							
+							
 						}
-						else {
-							isSelected = false;
-						}
+					
+						isSelected = false;
 					}
 
 				}

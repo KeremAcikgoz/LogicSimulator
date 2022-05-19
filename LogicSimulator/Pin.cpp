@@ -18,9 +18,15 @@ Pin::Pin(pinType pin_type, int pin_index, sf::Vertex position) {
 	numConnections = 0;
 	return;
 }
-//~Pin::~Pin(){
-//	cout << "pin destructor called" << endl;
-//}
+Pin::~Pin(){
+	//TODO: delete wires
+	/*if (wires) {
+		delete[] wires;
+	}*/
+	//delete[] isSrc;
+	//delete[] connectedTo;
+	cout << "pin destructor called" << endl;
+}
 
 void Pin::AddConnection(Object* conn_wire) {
 	wires[numConnections] = conn_wire;

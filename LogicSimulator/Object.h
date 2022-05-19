@@ -32,7 +32,7 @@ public:
 
     }
     virtual ~Object() {
-        cout << "Object Destructor called" << endl;
+         cout << "Object Destructor called" << endl;
     }
     virtual bool getState() {
         return state;

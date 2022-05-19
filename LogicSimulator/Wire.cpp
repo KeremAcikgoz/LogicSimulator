@@ -14,6 +14,16 @@ Wire::Wire(sf::Vertex start_point, Pin* start_pin, Pin* tmp_end_pin) {
 	tmp_end_pin->AddConnection(this);
 	TypeId = O_WIRE;
 	UpdatePosition(start_point);
+	cout << "Wire created" << endl;
+}
+
+Wire::~Wire() {
+	pins[0]->RemoveConnection(this);
+	pins[1]->RemoveConnection(this);
+	//delete[] pins;
+	//delete[] line;
+	UpdatePosition(sf::Vertex(sf::Vector2f(0.f, 0.f)));
+	cout << "wire destructed" << endl;
 }
 
 void Wire::Extend(sf::Vertex end_point) {
@@ -37,4 +47,8 @@ sf::VertexArray Wire::GetPosition() {
 	lines[0].position = line[0].position;
 	lines[1].position = line[1].position;
 	return lines;
+}
+
+Pin* Wire::GetFirstPin() {
+	return pins[0];
 }

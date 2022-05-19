@@ -34,3 +34,38 @@ LogicElement* append_to_le(LogicElement* le, LogicElement* new_le) {
     return le;
 }
 
+Object* removeElement(Object* objects, Object* rem_obj) {
+    
+    Object* obj = objects;
+    Object* prevObj = NULL;
+    while (obj) {
+        if (obj && obj == rem_obj) {
+            if (prevObj) {
+                prevObj->next = prevObj->next->next;
+                break;
+            }
+            else {
+                objects = obj->next;
+            }
+        }
+        prevObj = obj;
+        obj = obj->next;
+
+    }
+    //if (rem_obj->TypeId == O_WIRE) {
+    //    Wire* wire = dynamic_cast<Wire*> (rem_obj);
+    //    delete wire;
+    //}
+    //else {
+    //    AndGate* le = dynamic_cast<AndGate*> (rem_obj);
+    //    delete le;
+
+    //}
+    //delete rem_obj;
+    return objects;
+}
+
+void removePin(Pin* pin) {
+    delete &pin;
+    return;
+}

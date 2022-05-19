@@ -8,7 +8,7 @@ class AndGate : public LogicElement
 {
 public:
     AndGate(sf::Vertex pos);
-
+    ~AndGate();
 };
 
 #endif
