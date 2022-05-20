@@ -24,6 +24,7 @@
     <ClInclude Include="LogicElement.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pin.h" />
+    <ClInclude Include="Simulation.h" />
     <ClInclude Include="Simulator.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Wire.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Pin.cpp" />
+    <ClCompile Include="Simulation.cpp" />
     <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

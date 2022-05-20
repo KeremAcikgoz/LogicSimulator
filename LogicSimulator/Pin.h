@@ -17,7 +17,10 @@ public:
 	//First input pin has index 0, second pin has index 1, output pin has index 2, on�
 	pinType type; //whether this pin is input or output
 	bool isSrc[MAX_CONNECTIONS]; //TODO: whether this pin is the starting point the wire connected to it or the ending pointfor that wire for every connection it has
+								//not gonna use, if its input, isSrc = false if output, isSrc = true
+								//gonna use a method instead for now
 	Pin* connectedTo[MAX_CONNECTIONS]; //TODO: List of other pins this pin is connected to
+								//I'm gonna use a method instead for now
 	Object* wires[MAX_CONNECTIONS]; //Wires connected to this pin
 	int numConnections; //Number of connections on this pin
 	sf::Vector2f pos; //Screen position of the pin
@@ -31,6 +34,11 @@ public:
 	void RemoveConnection(Object* rem_wire);
 
 	void DragPin(sf::Vertex new_pos);
+
+	bool IsSrc();
+
+	Pin* ConnectedTo();
+
 };
 
 //bebek		

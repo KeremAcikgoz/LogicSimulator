@@ -9,6 +9,7 @@
 #include "Display.h"
 #include "Pin.h"
 #include "LogicElement.h"
+#include "Simulation.h"
 
 #define keyPressed(key) sf::Keyboard::isKeyPressed(key)
 #define WIN_W 1000
@@ -36,7 +37,7 @@ int main()
 	//cout << "wait" << endl;
 	//while (true);
 
-
+	bool isSimulationOn = true;
 	bool wasLeftClick = false;
 	bool wasRightClick = false;
 	Object* selectedObj = NULL;
@@ -100,7 +101,8 @@ int main()
 
 							if (obj->TypeId != O_WIRE && obj->DoesContain(mPos) && !obj->isSource) {
 								LogicElement* selectedLogicElement = dynamic_cast<LogicElement*>(obj);
-								if (selectedLogicElement->DoesContainPin(current_wire->GetFirstPin())) {
+								if (selectedLogicElement->DoesContainPin(current_wire->GetPin(0)) || 
+									selectedLogicElement->DoesContainPin(current_wire->GetPin(1))) {
 									break;
 								}
 								current_logic_element = selectedLogicElement;
@@ -116,10 +118,14 @@ int main()
 							//LogicElement* selectedElement = dynamic_cast<LogicElement*>(selectedObj);
 
 							Pin* selectedPin = current_logic_element->DoesTouchPins(mPos, &isTouching);
-
+							
 							if (isTouching) {
-								if (current_wire->GetFirstPin()->type != selectedPin->type) {
-									//TODO: check if type == input and there is a wire
+								if (selectedPin->type == INPUT && selectedPin->numConnections > 0) {
+									continue;
+								}
+								else if (selectedPin->type == INPUT && !(current_wire->IsConnected(0)) || 
+									selectedPin->type == OUTPUT && !(current_wire->IsConnected(1))) {
+									
 									current_wire->ConnectWire(selectedPin);
 									isSelected = false;
 									clickSpent = true;
@@ -162,10 +168,15 @@ int main()
 							Pin* selectedPin = selectedElement->DoesTouchPins(mPos, &isTouching);
 
 							if (isTouching) {
-								Wire* wire = new Wire(selectedPin->pos, selectedPin, &tmp_pin);
-								wire->SetSelected(true);
-								selectedObj = wire;
-								objects = append_to_objects(objects, wire);
+								if (selectedPin->type == INPUT && selectedPin->numConnections > 0) {
+									continue;
+								}
+								else {
+									Wire* wire = new Wire(selectedPin->pos, selectedPin, &tmp_pin);
+									wire->SetSelected(true);
+									selectedObj = wire;
+									objects = append_to_objects(objects, wire);
+								}
 							}
 
 						}
@@ -181,21 +192,29 @@ int main()
 					//remove if logic element or wire just once when it is clicked
 					Object* obj = objects;
 					while (obj) {
-						if (!obj->isSource && obj->TypeId != O_WIRE && obj->DoesContain(mPos)) {
+						if (!obj->isSource && obj->DoesContain(mPos)) {
 							//remove obj from objects
 							//remember to clear pins and wires too
-							LogicElement* selectedElement = dynamic_cast<LogicElement*>(obj);//?
-							for (int i = 0; i < 4; i++) {
-								Object** list_of_wires = selectedElement->GetPin(i)->wires;
-								for (int j = 0; j < MAX_CONNECTIONS; j++) {
-									objects = removeElement(objects, list_of_wires[j]);
-									delete[] list_of_wires[j];
-								}
-								
+							if (obj->TypeId == O_WIRE) {
+								Wire* selectedWire = dynamic_cast<Wire*>(obj);
+								objects = remove_from_objects(objects, selectedWire);
+								delete selectedWire;
+								break;
 							}
-							objects = removeElement(objects, selectedElement);
-							delete selectedElement;
-							break;
+							else {
+								LogicElement* selectedElement = dynamic_cast<LogicElement*>(obj);//?
+								for (int i = 0; i < 4; i++) {
+									Object** list_of_wires = selectedElement->GetPin(i)->wires;
+									for (int j = 0; j < selectedElement->GetPin(i)->numConnections; j++) {
+										objects = remove_from_objects(objects, list_of_wires[j]);
+									}
+									delete[] *list_of_wires;
+
+								}
+								objects = remove_from_objects(objects, selectedElement);
+								delete selectedElement;
+								break;
+							}
 						}
 						obj = obj->next;
 					}
@@ -212,7 +231,7 @@ int main()
 							//remove wire from objects
 							
 							Wire* selectedWire = dynamic_cast<Wire*>(selectedObj);//?
-							objects = removeElement(objects, selectedWire);
+							objects = remove_from_objects(objects, selectedWire);
 							delete selectedWire;
 							
 							
@@ -228,7 +247,10 @@ int main()
 				isSelected = false;
 			}
 		}
-		display.Render(objects, mPos);
+		if (isSimulationOn) {
+			Simulation::Simulate(objects);
+		}
+		display.Render(objects, mPos, isSimulationOn);
 
 	}
 

@@ -19,12 +19,6 @@ Pin::Pin(pinType pin_type, int pin_index, sf::Vertex position) {
 	return;
 }
 Pin::~Pin(){
-	//TODO: delete wires
-	/*if (wires) {
-		delete[] wires;
-	}*/
-	//delete[] isSrc;
-	//delete[] connectedTo;
 	cout << "pin destructor called" << endl;
 }
 
@@ -60,3 +54,20 @@ void Pin::DragPin(sf::Vertex new_pos) {
 	return;
 }
 
+bool Pin::IsSrc() {
+	return type == OUTPUT;
+}
+
+Pin* Pin::ConnectedTo() {
+	Pin* conn = new Pin[MAX_CONNECTIONS];
+	for (int i = 0; i < numConnections; i++) {
+		Wire* wire = dynamic_cast<Wire*>(wires[i]);
+		if (IsSrc()) {
+			conn[i] = *wire->GetPin(0);
+		}
+		else {
+			conn[i] = *wire->GetPin(1);
+		}
+	}
+	return conn;
+}

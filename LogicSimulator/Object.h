@@ -29,6 +29,7 @@ public:
         moving = false;
         isSource = false;
         //TypeId = O_AND;
+        cout << "Object created" << endl;
 
     }
     virtual ~Object() {
@@ -49,10 +50,13 @@ public:
     virtual void SetSelected(bool isSelected) {
         selected = isSelected;
     }
+    
     virtual void UpdatePosition(sf::Vertex new_position) = 0;
     virtual bool DoesContain(sf::Vector2f mPos) {
         return sprite.getGlobalBounds().contains(mPos);
     }
     virtual sf::VertexArray GetPosition() = 0;
+
+    virtual void LogicOperation() = 0;
 
 };

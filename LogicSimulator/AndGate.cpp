@@ -23,6 +23,14 @@ AndGate::AndGate(sf::Vertex pos) : LogicElement(pos) {
 AndGate::~AndGate() {
 	cout << "destructed and gate" << endl;
 }
+
+void AndGate::LogicOperation() {
+	bool in_state1 = pins[0].state == LOW ? false : true;
+	bool in_state2 = pins[1].state == LOW ? false : true;
+	bool out_state = in_state1 && in_state2;
+	pins[2].state = out_state ? HIGH : LOW;
+	return;
+}
 //
 //void AndGate::SetPinLocations(){
 //	for (int i = 0; i < numPins; i++){

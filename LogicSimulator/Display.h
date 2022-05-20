@@ -13,5 +13,5 @@ private:
 public:
 	Display(sf::RenderWindow& window);
 	//void Render (sf::Transform&, sf::Vector2f mLoc);
-	void Render(Object*& objects, sf::Vector2f mLoc);
+	void Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn);
 };

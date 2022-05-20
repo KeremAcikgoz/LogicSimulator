@@ -19,6 +19,7 @@ public:
     sf::VertexArray GetPosition();
     bool DoesContainPin(Pin* pin);
     Pin* GetPin(int i);
+    
 
 };
 

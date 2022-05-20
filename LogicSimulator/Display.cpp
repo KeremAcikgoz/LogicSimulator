@@ -23,7 +23,7 @@ Display::Display(sf::RenderWindow& window) : _window(&window)
 };
 
 
-void Display::Render(Object*& objects, sf::Vector2f mLoc)
+void Display::Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn)
 {
 	_window->clear(sf::Color::Black);
 	//Draw grid
