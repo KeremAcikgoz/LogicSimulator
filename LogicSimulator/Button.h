@@ -16,12 +16,18 @@ public:
     bool current;
     //bool getVar();
     //sf::Sprite* getSprite();
-    void checkClick(sf::Vector2f mousePos) {
+    virtual bool checkClick(sf::Vector2f mousePos) {
         if (mousePos.x > sprite.getPosition().x && mousePos.x < (sprite.getPosition().x + sprite.getGlobalBounds().width)) {
             if (mousePos.y > sprite.getPosition().y && mousePos.y < (sprite.getPosition().y + sprite.getGlobalBounds().height)) {
-                current = true;
+                if (current == false) {
+                    current = true;
+                }
+                else {
+                    current = false;
+                }
             }
         }
+        return current;
     }
 
     Button() {

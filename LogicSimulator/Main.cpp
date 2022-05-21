@@ -108,12 +108,11 @@ int main()
 			bool isLeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 			bool isRightClick = sf::Mouse::isButtonPressed(sf::Mouse::Right);
 			if(isSimulationOn){//isSimulationOn
-				int c = 1;
-				if (stopButton.current == false) {
-						stopButton.checkClick(mPos);
-						isSimulationOn = stopButton.current;
-						int a = 1;
-					}
+
+				if (stopButton.checkClick(mPos) && isLeftClick) {
+						isSimulationOn = false;
+						startButton.current = false;
+				}
 					//isSimulationOn = false;
 					//TODO: end simulation týklayýnca kapat.
 			}
@@ -211,11 +210,11 @@ int main()
 
 							}
 						}
-						else if (startButton.current == false) {
+						else if (startButton.checkClick(mPos)) {
 							//TODO: eðer startsimulation týklandýysa
-							startButton.checkClick(mPos);
-							isSimulationOn = startButton.current;
+							isSimulationOn = true;
 							//isSimulationOn = Simulation::StartSimulation(objects);
+							stopButton.current = false;
 							int a = 1;
 						}
 					}
