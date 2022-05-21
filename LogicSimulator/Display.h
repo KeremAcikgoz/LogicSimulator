@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Object.h"
+#include "StartButton.h"
+#include "StopButton.h"
 
 class Display
 {
@@ -13,5 +15,5 @@ private:
 public:
 	Display(sf::RenderWindow& window);
 	//void Render (sf::Transform&, sf::Vector2f mLoc);
-	void Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn);
+	void Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn, StartButton startButton, StopButton stopButton);
 };

@@ -1,5 +1,7 @@
 #include "Display.h"
 #include <cmath>
+#include "StartButton.h"
+#include "StopButton.h"
 
 Display::Display(sf::RenderWindow& window) : _window(&window)
 {
@@ -23,7 +25,7 @@ Display::Display(sf::RenderWindow& window) : _window(&window)
 };
 
 
-void Display::Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn)
+void Display::Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn, StartButton startButton, StopButton stopButton)
 {
 	_window->clear(sf::Color::Black);
 	//Draw grid
@@ -38,6 +40,8 @@ void Display::Render(Object*& objects, sf::Vector2f mLoc, bool isSimulationOn)
 //		_window->draw(_grid, gridMatrix);
 //	}
 	//Draw object connections
+	_window->draw(startButton.getSprite());
+	_window->draw(stopButton.getSprite());
 	Object* obj = objects;
 	while (obj) {
 		if (obj->TypeId == O_WIRE) {

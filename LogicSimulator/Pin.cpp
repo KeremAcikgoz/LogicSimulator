@@ -6,13 +6,13 @@
 
 Pin::Pin() {
 	type = INPUT;
-	state = HIGHZ;
+	state = LOW;
 	index = 0;
 	numConnections = 0;
 }
 Pin::Pin(pinType pin_type, int pin_index, sf::Vertex position) {
 	type = pin_type;
-	state = HIGHZ;
+	state = LOW;
 	index = pin_index;
 	pos = position.position;
 	numConnections = 0;

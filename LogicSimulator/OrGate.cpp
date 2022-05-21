@@ -1,18 +1,19 @@
+#include "OrGate.h"
 #include "AndGate.h"
 #include "LogicElement.h"
 #include <SFML/Graphics.hpp>
 #include "Pin.h"
 using namespace std;
-AndGate::AndGate(sf::Vertex pos) : LogicElement(pos) {
+OrGate::OrGate(sf::Vertex pos) : LogicElement(pos) {
 	// TODO: make implicit
-	if (!textures[1].loadFromFile("../assets/AND.png"))
+	if (!textures[1].loadFromFile("../assets/OR.png"))
 	{
 		cout << "Failed to load texture !" << endl;
 	}
 
 	sprite.setTexture(textures[1]);
 	numPins = 3;
-	TypeId = O_AND;
+	TypeId = O_OR;
 	relativePinLocations[0] = sf::Vertex(sf::Vector2f(0, 12));
 	relativePinLocations[1] = sf::Vertex(sf::Vector2f(0, 42));
 	relativePinLocations[2] = sf::Vertex(sf::Vector2f(90, 27));
@@ -20,14 +21,14 @@ AndGate::AndGate(sf::Vertex pos) : LogicElement(pos) {
 	this->UpdatePosition(position);
 
 }
-AndGate::~AndGate() {
-	cout << "destructed and gate" << endl;
+OrGate::~OrGate() {
+	cout << "destructed or gate" << endl;
 }
 
-void AndGate::LogicOperation() {
+void OrGate::LogicOperation() {
 	bool in_state1 = pins[0].state == LOW ? false : true;
 	bool in_state2 = pins[1].state == LOW ? false : true;
-	bool out_state = in_state1 && in_state2;
+	bool out_state = in_state1 || in_state2;
 	pins[2].state = out_state ? HIGH : LOW;
 	return;
 }

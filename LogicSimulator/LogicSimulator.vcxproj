@@ -20,23 +20,37 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AndGate.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="Display.h" />
+    <ClInclude Include="Gnd.h" />
+    <ClInclude Include="Led.h" />
     <ClInclude Include="LogicElement.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OrGate.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="Simulation.h" />
     <ClInclude Include="Simulator.h" />
+    <ClInclude Include="StartButton.h" />
+    <ClInclude Include="StopButton.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="Vdd.h" />
     <ClInclude Include="Wire.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AndGate.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Gnd.cpp" />
+    <ClCompile Include="Led.cpp" />
     <ClCompile Include="LogicElement.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OrGate.cpp" />
     <ClCompile Include="Pin.cpp" />
     <ClCompile Include="Simulation.cpp" />
+    <ClCompile Include="StartButton.cpp" />
+    <ClCompile Include="StopButton.cpp" />
+    <ClCompile Include="Vdd.cpp" />
     <ClCompile Include="Wire.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

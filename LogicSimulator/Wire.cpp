@@ -70,7 +70,7 @@ Pin* Wire::GetPin(int i) {
 }
 
 void Wire::LogicOperation() {
-	this->pins[1]->state = this->pins[0]->state;
+	this->pins[0]->state = this->pins[1]->state;
 	return;
 }
 

@@ -1,6 +1,10 @@
 #pragma once
 #include "Object.h"
 #include "AndGate.h"
+#include "OrGate.h"
+#include "Led.h"
+#include "Vdd.h"
+#include "Gnd.h"
 
 
 Object* create_element(ObjectTypes type, sf::Vertex position) {
@@ -9,6 +13,18 @@ Object* create_element(ObjectTypes type, sf::Vertex position) {
     {
     case O_AND:
         return new AndGate(position);
+        break;
+    case O_OR:
+        return new OrGate(position);
+        break;
+    case O_LED:
+        return new Led(position);
+        break;
+    case O_Vdd:
+        return new Vdd(position);
+        break;
+    case O_GND:
+        return new Gnd(position);
         break;
     default:
         return new AndGate(position);
