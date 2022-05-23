@@ -7,6 +7,8 @@
 #include "Gnd.h"
 #include "NotGate.h"
 #include "XorGate.h"
+#include "Clock.h"
+#include "Dff.h"
 
 
 Object* create_element(ObjectTypes type, sf::Vertex position) {
@@ -33,6 +35,12 @@ Object* create_element(ObjectTypes type, sf::Vertex position) {
         break;
     case O_XOR:
         return new XorGate(position);
+        break;
+    case O_CLOCK:
+        return new Clock(position);
+        break;
+    case O_Dff:
+        return new Dff(position);
         break;
     default:
         return new AndGate(position);

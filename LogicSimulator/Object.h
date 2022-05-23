@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 using namespace std;
 
-enum ObjectTypes { O_NULL, O_AND, O_OR, O_XOR, O_NOT, O_LED, O_Vdd, O_GND, O_Dff, O_WIRE };
+enum ObjectTypes { O_NULL, O_AND, O_OR, O_XOR, O_NOT, O_LED, O_Vdd, O_GND, O_Dff, O_WIRE, O_CLOCK };
 
 class Object
 {
