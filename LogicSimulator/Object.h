@@ -18,17 +18,14 @@ public:
     Object* next;
     sf::Sprite sprite;
     ObjectTypes TypeId;
-    bool isSource;
+    bool isSource; // if the object is a source, return true
     Object() {
-        //window = window
-        //textures = textures
         locked = false;
         next = NULL;
         selected = false;
         state = false;
         moving = false;
         isSource = false;
-        //TypeId = O_AND;
         cout << "Object created" << endl;
 
     }
@@ -52,7 +49,7 @@ public:
     }
     
     virtual void UpdatePosition(sf::Vertex new_position) = 0;
-    virtual bool DoesContain(sf::Vector2f mPos) {
+    virtual bool DoesContain(sf::Vector2f mPos) { // Function that returns true if the mouse position is inside an element
         return sprite.getGlobalBounds().contains(mPos);
     }
     virtual sf::VertexArray GetPosition() = 0;

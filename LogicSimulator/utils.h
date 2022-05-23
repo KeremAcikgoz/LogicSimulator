@@ -78,19 +78,9 @@ Object* remove_from_objects(Object* objects, Object* rem_obj) {
         }
         prevObj = obj;
         obj = obj->next;
-        cout << "removed" << endl;  
+        //cout << "removed" << endl;  
 
     }
     return objects;
 }
 
-//void removePin(Pin* pin) {
-//    delete &pin;
-//    return;
-//}
-
-//LogicElement* append_to_le(LogicElement* le, LogicElement* new_le) {
-//    new_le->next = le;
-//    le = new_le;
-//    return le;
-//}

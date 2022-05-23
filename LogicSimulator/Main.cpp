@@ -125,8 +125,7 @@ int main()
 						isSimulationOn = false;
 						startButton.current = false;
 				}
-					//isSimulationOn = false;
-					//TODO: end simulation týklayýnca kapat.
+				
 			}
 			else {
 				if (isLeftClick) {
@@ -169,7 +168,7 @@ int main()
 
 										current_wire->ConnectWire(selectedPin);
 										isSelected = false;
-										clickSpent = true;
+										clickSpent = true; // when connected, wire wont be able to move anymore.
 									}
 								}
 
@@ -182,6 +181,7 @@ int main()
 						}
 					}
 					else {
+						//First time clicking on an object.
 						//click actions: create new instance from source and select it, select, create wire from that pin, select
 						Object* obj = objects;
 						while (obj) {
@@ -198,7 +198,6 @@ int main()
 								//create new object from that type and select that
 								selectedObj = create_element(selectedObj->TypeId, mPos);
 								objects = append_to_objects(objects, selectedObj);
-
 							}
 							else {
 								//check if it is close to a pin,
@@ -227,7 +226,6 @@ int main()
 							isSimulationOn = true;
 							//isSimulationOn = Simulation::StartSimulation(objects);
 							stopButton.current = false;
-							int a = 1;
 						}
 					}
 					wasLeftClick = true;
@@ -257,7 +255,6 @@ int main()
 										}
 										if (selectedElement->GetPin(i)->numConnections > 0) {
 											delete[] * list_of_wires;
-
 										}
 
 									}
@@ -283,7 +280,6 @@ int main()
 								Wire* selectedWire = dynamic_cast<Wire*>(selectedObj);//?
 								objects = remove_from_objects(objects, selectedWire);
 								delete selectedWire;
-
 
 							}
 
