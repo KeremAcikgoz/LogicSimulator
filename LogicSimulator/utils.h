@@ -5,6 +5,8 @@
 #include "Led.h"
 #include "Vdd.h"
 #include "Gnd.h"
+#include "NotGate.h"
+#include "XorGate.h"
 
 
 Object* create_element(ObjectTypes type, sf::Vertex position) {
@@ -25,6 +27,12 @@ Object* create_element(ObjectTypes type, sf::Vertex position) {
         break;
     case O_GND:
         return new Gnd(position);
+        break;
+    case O_NOT:
+        return new NotGate(position);
+        break;
+    case O_XOR:
+        return new XorGate(position);
         break;
     default:
         return new AndGate(position);

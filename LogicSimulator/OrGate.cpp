@@ -1,5 +1,4 @@
 #include "OrGate.h"
-#include "AndGate.h"
 #include "LogicElement.h"
 #include <SFML/Graphics.hpp>
 #include "Pin.h"

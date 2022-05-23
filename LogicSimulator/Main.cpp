@@ -62,17 +62,23 @@ int main()
 	Object* or_source = create_element(O_OR, get_vertex(1.f, 100.f));
 	Object* led_source = create_element(O_LED, get_vertex(1.f, 300.f));
 	Object* vdd_source = create_element(O_Vdd, get_vertex(1.f, 400.f));
-	Object* gnd_source = create_element(O_GND, get_vertex(1.f, 1.f));
+	Object* gnd_source = create_element(O_GND, get_vertex(1.f, 500.f));
+	Object* not_source = create_element(O_NOT, get_vertex(1.f, 600.f));
+	Object* xor_source = create_element(O_XOR, get_vertex(1.f, 1.f));
 	led_source->isSource = true;
 	vdd_source->isSource = true;
 	or_source->isSource = true;
 	and_source->isSource = true;
 	gnd_source->isSource = true;
+	not_source->isSource = true;
+	xor_source->isSource = true;
 	objects = append_to_objects(objects, and_source);
 	objects = append_to_objects(objects, or_source);
 	objects = append_to_objects(objects, led_source);
 	objects = append_to_objects(objects, vdd_source);
 	objects = append_to_objects(objects, gnd_source);
+	objects = append_to_objects(objects, not_source);
+	objects = append_to_objects(objects, xor_source);
 
 
 	//Object* and_source2 = create_element(O_AND, get_vertex(1.f, 100.f));

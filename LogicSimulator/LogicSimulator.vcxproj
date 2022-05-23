@@ -25,6 +25,7 @@
     <ClInclude Include="Gnd.h" />
     <ClInclude Include="Led.h" />
     <ClInclude Include="LogicElement.h" />
+    <ClInclude Include="NotGate.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="OrGate.h" />
     <ClInclude Include="Pin.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vdd.h" />
     <ClInclude Include="Wire.h" />
+    <ClInclude Include="XorGate.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AndGate.cpp" />
@@ -44,6 +46,7 @@
     <ClCompile Include="Led.cpp" />
     <ClCompile Include="LogicElement.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NotGate.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="OrGate.cpp" />
     <ClCompile Include="Pin.cpp" />
@@ -52,6 +55,7 @@
     <ClCompile Include="StopButton.cpp" />
     <ClCompile Include="Vdd.cpp" />
     <ClCompile Include="Wire.cpp" />
+    <ClCompile Include="XorGate.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
